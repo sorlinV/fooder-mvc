@@ -17,31 +17,42 @@ class Data {
             }
         }
     }
-            
+
     function __construct() {
-        if (file_exists("users") && file_exists("events") && file_exists("tags")) {
-            $this->users = unserialize(file_get_contents("users"));
-            $this->events = unserialize(file_get_contents("events"));
-            $this->tags = unserialize(file_get_contents("tags"));
+        if (basename(__DIR__) == "action" || basename(__DIR__) == "lib") {
+            $path = __DIR__ . '/../';
+        } else {
+            $path = __DIR__ . '/';
+        }
+        if (file_exists($path . "data/users") && file_exists($path . "data/events")
+            && file_exists($path . "data/tags")) {
+            $this->users = unserialize(file_get_contents($path . "data/users"));
+            $this->events = unserialize(file_get_contents($path . "data/events"));
+            $this->tags = unserialize(file_get_contents($path . "data/tags"));
         } else {
             $this->users = [];
             $this->events = [];
             $this->tags = [];
         }
-//        $this->verif_event();
+        $this->verif_event();
     }
 
     function saveData() {
-        if (!is_dir("data")) {
-            mkdir("data");
+        if (basename(__DIR__) == "action" || basename(__DIR__) == "lib") {
+            $path = __DIR__ . '/../';
+        } else {
+            $path = __DIR__ . '/';
         }
-        $fd = fopen((__DIR__) . "data/users", "w+");
+        if (!is_dir($path . "data")) {
+            mkdir($path . "data");
+        }
+        $fd = fopen($path . "data/users", "w+");
         fwrite($fd, serialize($this->users));
         fclose($fd);
-        $fda = fopen((__DIR__) . "data/events", "w+");
+        $fda = fopen($path . "data/events", "w+");
         fwrite($fda, serialize($this->events));
         fclose($fda);
-        $fdb = fopen((__DIR__) . "data/tags", "w+");
+        $fdb = fopen($path . "data/tags", "w+");
         fwrite($fdb, serialize($this->tags));
         fclose($fdb);
     }
@@ -52,6 +63,7 @@ class Data {
 
     function verifUser ($userVerif, $passwordVerif) {
         foreach ($this->users as $user) {
+            echo $user->getPassword() . ' && ' . hash("sha256", $passwordVerif . $user->getSalt()) . "</br>";
             if ($user->getUser() == $userVerif
                     && $user->getPassword() == hash("sha256", $passwordVerif . $user->getSalt())) {
                 return true;
@@ -68,7 +80,7 @@ class Data {
         }
         return false;        
     }
-            
+
     function getUser($username) {
         foreach ($this->users as $user) {
             if ($user->getUser() == $username) {
@@ -88,12 +100,26 @@ class Data {
     }
 
     function addEvent(Event $event) {
+        $temp = [];
         foreach ($this->events as $e) {
             if ($e->getTitle() == $event->getTitle()) {
                 return false;
             }
         }
-        array_push($this->events, $event);
+        $newDate = intval(str_replace("-", "", $event->getDate()));
+        foreach ($this->events as $e) {
+            $thisDate =  intval(str_replace("-", "", $e->getDate()));
+            if ($thisDate > $newDate && $newDate != -1) {
+                $temp[] = $event;
+                $newDate = -1;
+            }
+            $temp[] = $e;
+        }
+        if ($newDate != -1) {
+            $temp [] = $event;
+        }
+        $this->events = $temp;
+//        array_push($this->events, $event);
     }
     
     function addTags ($tags) {
@@ -108,38 +134,46 @@ class Data {
         }
     }
 
-    function getEvent($eventtitle) {
+    function getEvent($eventTitle) {
         foreach ($this->events as $event) {
-            if ($event->getTitle() == $eventtitle) {
+            if ($event->getTitle() == $eventTitle) {
                 return $event;
             }
         }
         return false;
-    }    
-    
-    function affEvents() {
-        if (count($this->events)) {
-            foreach ($this->events as $event) {
-                $event->html();
-            }
-        }
     }
-    
-    function search($value) {
-        if ($value != "") {
-            echo "<h2>Users find:</h2>";
+//error, trie par date, index, profile modifier, profile redirect if not logged
+    function searchUsers ($text) {
+        $out = [];
+        if (empty($text)) {
+            return $this->users;
+        } else {
             foreach ($this->users as $u) {
-                if (strpos($u->getUser(), $value) !== false) {
-                    $u->toHtml();
-                }
-            }
-            echo "<h2>Event find:</h2>";
-            foreach ($this->events as $e) {
-                if (strpos($e->getTitle(), $value) !== false) {
-                    $e->html();
+                if (stripos($u->getUser(), $text) !== false && in_array($u, $out) === false) {
+                    $out[] = $u;
                 }
             }
         }
+        return $out;
+    }
+
+    function searchEvents ($text, $tags) {
+        $out = [];
+        if (empty($text)) {
+            foreach ($this->events as $e) {
+                if (count(array_intersect($tags, $e->getTags())) == count($tags)) {
+                    $out[] = $e;
+                }
+            }
+        } else {
+            foreach ($this->events as $e) {
+                if (stripos($e->getTitle(), $text) !== false && in_array($e, $out) === false
+                    || count(array_intersect($tags, $e->getTags())) == count($tags)) {
+                    $out[] = $e;
+                }
+            }
+        }
+        return $out;
     }
 
     function getUsers() {

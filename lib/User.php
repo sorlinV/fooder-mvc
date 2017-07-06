@@ -25,59 +25,6 @@ class User {
         $this->followers = $followers;
         $this->subscribes = $subscribes;
     }
-
-    function toHtml () {
-        echo '<article class="user">';
-        echo '<img src="' . $this->img . '" alt="' . $this->user . ' avatar"/>';
-        echo '<aside>';
-        echo '<h2>' . $this->user . "</h2>";
-        echo '</aside>';
-        if (isset($_SESSION['user'])
-                && in_array($_SESSION['user']->getUser(), $this->followers) === false) {
-            echo '<form method="POST">';
-            echo '<input type="hidden" name="subuser" value="' . $this->user . '"/>';
-            echo '<input type="submit" value="Subscribe" />';
-            echo '</form>';            
-        } else {
-            echo '<form method="POST">';
-            echo '<input type="hidden" name="unsubuser" value="' . $this->user . '"/>';
-            echo '<input type="submit" value="Unsubscribe" />';
-            echo '</form>';                        
-        }
-        echo '</article>';
-    }
-
-    function toHtmlPrivate ($data) {
-        echo '<article class="user">';
-        echo '<img src="' . $this->img . '" alt="' . $this->user . ' avatar"/>';
-        echo '<section>';
-        echo '<h2>' . $this->user . "</h2>";
-        echo '<p>' . $this->adresse . '</p>';
-        echo '<p>' . $this->firstname . '</p>';
-        echo '<p>' . $this->lastname . '</p>';
-        echo '</section>';
-        if (count($this->subscribes) != 0) {
-            echo '<section>';
-            echo '<h3>Subscribes : </h3>';
-            echo '<ul>';
-            foreach ($this->subscribes as $sub) {
-                echo '<li>' . $data->getUser($sub)->getUser() . '</li>';
-            }
-            echo '</ul>';
-            echo '</section>';            
-        }
-        if (count($this->followers) != 0) {
-            echo '<section>';
-            echo '<h3>Followers : </h3>';
-            echo '<ul>';
-            foreach ($this->followers as $follower) {
-                echo '<li>' . $data->getUser($follower)->getUser() . '</li>';
-            }
-            echo '</ul>';
-            echo '</section>';
-            echo '</article>'; 
-        }
-    }
     
     function getUser() {
         return $this->user;
@@ -112,4 +59,62 @@ class User {
         $pos = in_array($sub, $this->subscribes);
         array_splice($this->subscribes, 0, $pos);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRecette(): array
+    {
+        return $this->recette;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFollowers(): array
+    {
+        return $this->followers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubscribes(): array
+    {
+        return $this->subscribes;
+    }
+
+
 }
