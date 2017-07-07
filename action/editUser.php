@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: isidoris-simplon
- * Date: 04/07/17
- * Time: 14:48
- */
 include_once '../lib/Data.php';
 if (!isset($data)) {
     $data = new Data();
@@ -13,21 +7,20 @@ if (session_status() != 2) {
     session_start();
 }
 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-if (isset($post['user']) && isset($post['password']) && isset($post['password2'])
+if (isset($post['password']) && isset($post['password2'])
     && $post['password'] == $post['password2'] && isset($post['adresse'])
-    && isset($post['firstname']) && isset($post['lastname'])) {
+    && isset($post['firstname']) && isset($post['lastname']) && isset($_SESSION['user'])) {
     if (!is_dir("../data/imgUser")) {
         mkdir("../data/imgUser");
     }
     if (isset($_FILES['avatar']) && count($_FILES) != 0
         && $_FILES['avatar']['tmp_name'] !== "") {
-        $img = "data/imgUser/" . $post['user'] . ".png";
+        $img = "data/imgUser/" . $_SESSION['user']->getUser() . ".png";
         move_uploaded_file($_FILES['avatar']['tmp_name'], "../" . $img);
-    } else {
-        $img = "img/default.png";
     }
-    $user = new User($post['user'], hash("sha256", $post['password']), $img
-        , $post['adresse'], $post['firstname'], $post['lastname']);
-    $data->addUser($user);
+    $data->getUser($_SESSION['user']->getUser())->edit
+    ($post['password'], $post['adresse'], $post['firstname'], $post['lastname']);
+} else {
+    header('location: ../profil.php?error=1');
 }
-include 'login.php';
+header('location: ../profil.php');

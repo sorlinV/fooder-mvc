@@ -6,12 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Profil</title>
 </head>
 <body>
     <?php
         include 'header.php';
-        include 'libaff/affUser.php';
-    ?>
+    if (isset($_GET['edit']) && $_GET['edit'] == "1") {
+        include 'libaff/editUser.php'; ?>
+        <form action="" method="get">
+            <button name="edit" value="0">Cancel</button>
+        </form>
+    <?php } else {
+        include 'libaff/affUser.php'; ?>
+        <form action="" method="get">
+            <button name="edit" value="1">Edit profil</button>
+        </form>
+    <?php } ?>
 </body>
 </html>

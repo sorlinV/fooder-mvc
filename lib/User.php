@@ -25,7 +25,15 @@ class User {
         $this->followers = $followers;
         $this->subscribes = $subscribes;
     }
-    
+
+    function edit($password, $adresse, $firstname, $lastname) {
+        $this->salt = hash("sha256", rand());
+        $this->password = hash("sha256", $password.$this->salt);
+        $this->adresse = $adresse;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+    }
+
     function getUser() {
         return $this->user;
     }

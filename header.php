@@ -13,8 +13,9 @@ if (session_status() != 2) {
 <header>
     <a href="index.php"><img src="img/logo.png" id="logo" alt="logo fooder"></a>
     <ul>
-        <li><a href="index.php">index</a></li>
-        <li><a href="addEvent.php">addEvent</a></li>
+        <li><a href="index.php">Index</a></li>
+        <li><a href="search.php">Search</a></li>
+        <li><a href="addEvent.php">AddEvent</a></li>
         <li><a href="register.php">Register</a></li>
         <li><a href="profil.php">Profil</a></li>
     </ul>

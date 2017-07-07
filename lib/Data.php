@@ -119,7 +119,6 @@ class Data {
             $temp [] = $event;
         }
         $this->events = $temp;
-//        array_push($this->events, $event);
     }
     
     function addTags ($tags) {
@@ -142,7 +141,7 @@ class Data {
         }
         return false;
     }
-//error, trie par date, index, profile modifier, profile redirect if not logged
+//error, profile modifier, profile redirect if not logged
     function searchUsers ($text) {
         $out = [];
         if (empty($text)) {

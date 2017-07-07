@@ -11,7 +11,6 @@ if (!empty($_SESSION['user'])) :
 <article class="user">
     <img src="<?php echo $user->getImg(); ?>" alt="<?php echo $user->getUser(); ?> avatar"/>
     <section>
-        <h2><?php echo $user->getUser(); ?></h2>
         <p><?php echo $user->getAdresse(); ?></p>
         <p><?php echo $user->getFirstname(); ?></p>
         <p><?php echo $user->getLastname(); ?></p>

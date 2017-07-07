@@ -11,6 +11,9 @@
     <body>
         <?php
             include_once 'header.php';
+            if ($_GET['error'] == 1) : ?>
+            <p class="error">Something is wrong with formulaire</p>
+            <?php endif;
             include_once 'libaff/formRegister.html';
         ?>
     </body>

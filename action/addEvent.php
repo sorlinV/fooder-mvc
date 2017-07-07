@@ -46,5 +46,7 @@ if (isset($_SESSION['user'])) {
         }
         $data->addEvent($event);
     }
+} else {
+    header('location: ../addEvent.php?error=1');
 }
 header('location: ../index.php');
