@@ -21,7 +21,7 @@ if (session_status() != 2) {
     </ul>
     <?php
     if (isset($_SESSION['user'])) {
-        echo $_SESSION['user']->getUser();
+        echo '<p style="color: white; font-size: 2em; text-decoration: underline;">' . $_SESSION['user']->getUser() . '</p>';
         include 'libaff/formDeconnection.html';
     } else {
         include 'libaff/formConnect.html';
