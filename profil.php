@@ -12,16 +12,24 @@
 <body>
     <?php
         include 'header.php';
-    if (isset($_GET['edit']) && $_GET['edit'] == "1") {
+    if (isset($_SESSION['user']) && isset($_GET['edit']) && $_GET['edit'] == "1") {
         include 'libaff/editUser.php'; ?>
         <form action="" method="get">
             <button name="edit" value="0">Cancel</button>
         </form>
-    <?php } else {
+    <?php } elseif (isset($_SESSION['user'])) {
         include 'libaff/affUser.php'; ?>
         <form action="" method="get">
             <button name="edit" value="1">Edit profil</button>
         </form>
+    <?php } else { ?>
+    <article class="index">
+        <h2>Before consulting profil: </h2>
+        <h2>Register : </h2>
+        <a href="register.php"><p>REGISTER</p></a>
+        <h2>Connect : </h2>
+        <a href="connect.php"><p>Connections</p></a>
+    </article>
     <?php } ?>
 </body>
 </html>

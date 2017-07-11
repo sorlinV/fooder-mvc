@@ -27,8 +27,10 @@ class User {
     }
 
     function edit($password, $adresse, $firstname, $lastname) {
-        $this->salt = hash("sha256", rand());
-        $this->password = hash("sha256", $password.$this->salt);
+        if ($password != false) {
+            $this->salt = hash("sha256", rand());
+            $this->password = hash("sha256", $password . $this->salt);
+        }
         $this->adresse = $adresse;
         $this->firstname = $firstname;
         $this->lastname = $lastname;

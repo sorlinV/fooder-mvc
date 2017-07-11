@@ -17,11 +17,13 @@ if (isset($post['user']) && isset($post['password'])) {
     $post['password'] = hash("sha256", $post['password']);
     if ($data->verifUser($post['user'], $post['password'])) {
         $_SESSION['user'] = $data->getUser($post['user']);
+        header('location: ../index.php');
+        exit ();
     }
-    header ('location: ../index.php');
 }
 if (isset($post['deco'])) {
     unset($_SESSION['user']);
     header ('location: ../index.php');
+    exit ();
 }
 header('location: ../register.php?error=1');

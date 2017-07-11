@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: isidoris-simplon
- * Date: 04/07/17
- * Time: 14:59
- */
 include_once '../lib/Data.php';
 if (!isset($data)) {
     $data = new Data();
@@ -24,9 +18,6 @@ if (!empty($post['newTags'])) {
         $tags[] = $t;
     }
 }
-echo '<pre>';
-var_dump($tags);
-echo '</pre>';
 if (isset($_SESSION['user'])) {
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     if (isset($post['title']) && isset($post['place']) && isset($post['type']) &&

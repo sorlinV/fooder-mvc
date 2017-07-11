@@ -6,11 +6,12 @@ if (!isset($data)) {
 if (session_status() != 2) {
     session_start();
 }
-foreach ($data->getEvents() as $e) {?>
+foreach ($data->getEvents() as $e) {
+    $eventDate = new Date ($e->getDate());?>
     <article class="event">
         <aside>
             <h2><?php echo $e->getTitle(); ?></h2>
-            <p>Event date: <?php echo $e->getDate(); ?></p>
+            <p>Event date: <?php echo $eventDate->getDate(); ?></p>
             <p>Event type : <?php echo $e->getType(); ?></p>
             <p>Event create by : <?php echo $e->getCreator()->getUser(); ?></p>
             <p><?php echo count($e->getUsers()); ?> user(s) registered</p>
