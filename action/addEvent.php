@@ -18,6 +18,7 @@ if (!empty($post['newTags'])) {
         $tags[] = $t;
     }
 }
+
 if (isset($_SESSION['user'])) {
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     if (isset($post['title']) && isset($post['place']) && isset($post['type']) &&

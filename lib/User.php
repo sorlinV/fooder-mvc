@@ -8,7 +8,6 @@ class User {
     private $adresse;
     private $firstname;
     private $lastname;
-    private $recette;
     private $followers;
     private $subscribes;
  
@@ -21,7 +20,6 @@ class User {
         $this->adresse = $adresse;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
-        $this->recette = $recette;
         $this->followers = $followers;
         $this->subscribes = $subscribes;
     }

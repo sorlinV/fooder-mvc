@@ -1,11 +1,48 @@
 * {
     margin: 0;
+    padding: 0;
     text-decoration: none;
     list-style: none;
 }
 
-a {
-    color: blueviolet;
+input {
+    height: 1.5em;
+    border-radius: 10px;
+    padding: 0 3%;
+}
+
+/*====================
+======= HEADER =======
+=================== */
+
+header {
+    display: flex;
+    align-items: center;
+    background: black;
+    justify-content: space-around;
+}
+
+header ul {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+    color: white;
+}
+
+header a {
+    color: white;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+header form {
+    display: flex;
+    flex-direction: column;
+    background: lightgrey;
 }
 
 /*======== NAV ==========
@@ -13,18 +50,6 @@ a {
 ========= LOGO ==========
 =========================
 =======================*/
-
-#logo {
-    -ms-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-    height: 5em;
-    margin: 1.5em;
-}
-
-#logo * {
-    height: 100%;
-}
 
 @keyframes logo_anim {
     from {
@@ -39,6 +64,18 @@ a {
     }
 }
 
+#logo {
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    height: 5em;
+    margin: 1.5em;
+}
+
+#logo * {
+    height: 100%;
+}
+
 #logo:hover {
     animation-name: logo_anim;
     animation-duration: 3s;
@@ -46,11 +83,49 @@ a {
     animation-timing-function: linear;
 }
 
-/*=======================
-=========================
-======== USERS ==========
-=========================
-=======================*/
+/*====================
+===== HEADER END =====
+=================== */
+/*====================
+======= BODY =======
+=================== */
+
+body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+body form {
+    display: flex;
+    flex-direction: column;
+    background: lightgrey;
+    max-width: 996px;
+    margin: 0 auto;
+}
+
+body .index > a {
+    display: flex;
+    justify-content: center;
+    padding: 1% 20%;
+    align-items: center;
+    background: lightblue;
+    border: 3px solid black;
+    border-radius: 30px;
+    text-align: center;
+    vertical-align: center;
+    font-size: 1.5em;
+    width: 100%;
+    max-width: 996px;
+}
+
+
+body img {
+    width: 6em;
+    height: 6em;
+}
+
+/*======== USERS ==========*/
 
 .user {
     display: flex;
@@ -69,11 +144,7 @@ a {
     margin: 0 auto;
 }
 
-/*=======================
-=========================
-======== EVENT ==========
-=========================
-=======================*/
+/*======== EVENT ==========*/
 
 .event {
     display: flex;
@@ -90,86 +161,4 @@ a {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-}
-/*=======================
-=========================
-======== INDEX ==========
-=========================
-=======================*/
-
-.index {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.index > a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 3em;
-    background: lightgrey;
-    border: 3px solid black;
-    border-radius: 30px;
-    text-align: center;
-    vertical-align: center;
-    font-size: 1.5em;
-}
-
-/*=====================*/
-
-.error {
-    color: red;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background: lightgrey;
-    max-width: 1000px;
-    align-self: center;
-    margin: 0 auto;
-}
-
-form > * {
-    display: flex;
-}
-
-header form {
-    margin: 0;
-}
-
-form input {
-    border-radius: 10px;
-}
-
-header ul {
-    display: flex;
-}
-
-header li {
-    margin: 0 3%;
-}
-header {
-    display: flex;
-    flex-wrap: nowrap;
-    margin: 0 auto;
-    justify-content: space-around;
-    align-items: center;
-    background-color: black;
-    color: black;
-    font-family: 'Pangolin', cursive;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-img {
-    height: 6em;
-    width: 6em;
 }

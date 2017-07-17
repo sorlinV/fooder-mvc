@@ -29,6 +29,14 @@ foreach ($data->getEvents() as $e) {
                     <input type="submit" value="Subscribe"/>
                 <?php endif; ?>
             </form>
+        <?php else : ?>
+            <article class="index">
+                <p>To go at this event </p>
+                <p>Register : </p>
+                <a href="register.php"><p>REGISTER</p></a>
+                <p>Connect : </p>
+                <a href="connect.php"><p>Connections</p></a>
+            </article>
         <?php endif; ?>
     </article>
 <?php }

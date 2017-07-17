@@ -64,6 +64,14 @@ if ((!empty($get['searched']) && in_array('events', $get['searched']) !== false)
                         <input type="submit" value="Subscribe"/>
                     <?php endif; ?>
                 </form>
+            <?php else : ?>
+                <article class="index">
+                    <h2>Before consulting profil: </h2>
+                    <h2>Register : </h2>
+                    <a href="register.php"><p>REGISTER</p></a>
+                    <h2>Connect : </h2>
+                    <a href="connect.php"><p>Connections</p></a>
+                </article>
             <?php endif; ?>
         </article>
     <?php endforeach;
