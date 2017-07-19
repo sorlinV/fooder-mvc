@@ -2,11 +2,8 @@
 if (!isset($data)) {
     $data = new Data();
 }
-if (session_status() != 2) {
-    session_start();
-}
 if (!empty($_SESSION['user'])) :
-    $user = $data->getUser($_SESSION['user']->getUser());
+    $user = $data->getUser(unserialize($_SESSION['user'])->getUser());
 ?>
 <article class="user">
     <img src="<?php echo $user->getImg(); ?>" alt="<?php echo $user->getUser(); ?> avatar"/>

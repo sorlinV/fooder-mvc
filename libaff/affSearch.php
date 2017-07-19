@@ -3,9 +3,6 @@ $pageName = "$_SERVER[REQUEST_URI]";
 if (!isset($data)) {
     $data = new Data();
 }
-if (session_status() != 2) {
-    session_start();
-}
 
 $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 if ((!empty($get['searched']) && in_array('users', $get['searched']) !== false)
@@ -17,15 +14,15 @@ if ((!empty($get['searched']) && in_array('users', $get['searched']) !== false)
                 <h2><?php echo $u->getUser(); ?></h2>
             </aside>
             <?php if (!empty($_SESSION['user'])
-                && in_array($_SESSION['user']->getUser(), $u->getFollowers()) === false
-                && $u->getUser() != $_SESSION['user']->getUser()) : ?>
+                && in_array(unserialize($_SESSION['user'])->getUser(), $u->getFollowers()) === false
+                && $u->getUser() != unserialize($_SESSION['user'])->getUser()) : ?>
                 <form action="action/subUser.php" method="POST">
                     <input type="hidden" name="dir" value="<?php echo basename($pageName); ?>"/>
                     <input type="hidden" name="subuser" value="<?php echo $u->getUser(); ?>"/>
                     <input type="submit" value="Subscribe"/>
                 </form>
             <?php elseif (!empty($_SESSION['user'])
-                && $u->getUser() != $_SESSION['user']->getUser()) : ?>
+                && $u->getUser() != unserialize($_SESSION['user'])->getUser()) : ?>
                 <form action="action/subUser.php" method="POST">
                     <input type="hidden" name="dir" value="<?php echo basename($pageName); ?>"/>
                     <input type="hidden" name="unsubuser" value="<?php echo $u->getUser(); ?>"/>

@@ -2,9 +2,6 @@
 if (!isset($data)) {
     $data = new Data();
 }
-if (session_status() != 2) {
-    session_start();
-}
 ?>
 <form action="search.php" method="GET">
     <label for="search">Search :</label>

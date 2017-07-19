@@ -2,9 +2,6 @@
 if (!isset($data)) {
     $data = new Data();
 }
-if (session_status() != 2) {
-    session_start();
-}
 ?>
 <form enctype="multipart/form-data" action="action/addEvent.php" method="POST">
     <label for="title">Titre de l'event</label>

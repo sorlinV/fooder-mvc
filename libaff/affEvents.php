@@ -3,9 +3,6 @@ $pageName = "$_SERVER[REQUEST_URI]";
 if (!isset($data)) {
     $data = new Data();
 }
-if (session_status() != 2) {
-    session_start();
-}
 foreach ($data->getEvents() as $e) {
     $eventDate = new Date ($e->getDate());?>
     <article class="event">
@@ -21,7 +18,7 @@ foreach ($data->getEvents() as $e) {
         <?php endif; ?>
         <?php if (!empty($_SESSION['user'])) : ?>
             <form action="action/subEvent.php" method="post">
-                <?php if (in_array($_SESSION['user']->getUser(), $e->getUsers()) || $_SESSION['user'] == $e->getCreator()) : ?>
+                <?php if (in_array(unserialize($_SESSION['user'])->getUser(), $e->getUsers()) || unserialize($_SESSION['user']) == $e->getCreator()) : ?>
                     <p> adresse: <?php echo $e->getAdresse(); ?></p>
                 <?php elseif (!empty($_SESSION['user'])) : ?>
                     <input type="hidden" name="dir" value="<?php echo basename($pageName); ?>"/>

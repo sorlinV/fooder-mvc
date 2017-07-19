@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
         <main>
             <article class="index">
                 <?php if (!empty($_SESSION['user'])) : ?>
-                    <h2>Hello, <?php echo $_SESSION['user']->getUser() ?> ! </h2>
+                    <h2>Hello, <?php echo unserialize($_SESSION['user'])->getUser() ?> ! </h2>
                     <h2>Do a search : </h2>
                     <a href="search.php"><p>SEARCH</p></a>
                     <h2>Or create an event : </h2>

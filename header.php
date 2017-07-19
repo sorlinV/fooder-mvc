@@ -6,10 +6,6 @@ include_once 'lib/Event.php';
 if (!isset($data)) {
     $data = new Data();
 }
-if (session_status() != 2) {
-    session_start();
-}
-
 ?>
 <header>
 
@@ -27,7 +23,7 @@ if (session_status() != 2) {
     </ul>
     <?php
     if (isset($_SESSION['user'])) { ?>
-        <?php include 'libaff/formDeconnection.html';
+        <?php include 'libaff/formDeconnection.php';
     } else {
         include 'libaff/formConnect.html';
     }

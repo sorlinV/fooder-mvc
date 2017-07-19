@@ -1,10 +1,8 @@
 <?php
 include_once '../lib/Data.php';
+session_start();
 if (!isset($data)) {
     $data = new Data();
-}
-if (session_status() != 2) {
-    session_start();
 }
 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 $tags = [];
@@ -31,10 +29,10 @@ if (isset($_SESSION['user'])) {
                 "../data/imgEvent/" . $post['title'] . ".png");
             $event = new Event($post['title'], $post['date']
                 . "-" . str_replace(":", "-", $post['time']), $post['type'],
-                $post['place'], "data/imgEvent/" . $post['title'] . '.png', $_SESSION['user'], $tags);
+                $post['place'], "data/imgEvent/" . $post['title'] . '.png', unserialize($_SESSION['user']), $tags);
         } else {
             $event = new Event($post['title'], $post['date'] . $post['time'], $post['type'],
-                $post['place'], false, $_SESSION['user'], $tags);
+                $post['place'], false, unserialize($_SESSION['user']), $tags);
         }
         $data->addEvent($event);
     }

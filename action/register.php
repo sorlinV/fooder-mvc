@@ -6,11 +6,9 @@
  * Time: 14:48
  */
 include_once '../lib/Data.php';
+session_start();
 if (!isset($data)) {
     $data = new Data();
-}
-if (session_status() != 2) {
-    session_start();
 }
 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 if (isset($post['user']) && isset($post['password']) && isset($post['password2'])
