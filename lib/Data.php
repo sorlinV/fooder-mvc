@@ -63,7 +63,6 @@ class Data {
 
     function verifUser ($userVerif, $passwordVerif) {
         foreach ($this->users as $user) {
-            echo $user->getPassword() . ' && ' . hash("sha256", $passwordVerif . $user->getSalt()) . "</br>";
             if ($user->getUser() == $userVerif
                     && $user->getPassword() == hash("sha256", $passwordVerif . $user->getSalt())) {
                 return true;
