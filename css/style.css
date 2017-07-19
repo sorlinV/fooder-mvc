@@ -116,6 +116,7 @@ body .index > a {
     vertical-align: center;
     font-size: 1.5em;
     width: 50%;
+    margin: 0 auto;
     max-width: 996px;
 }
 
