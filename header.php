@@ -8,7 +8,6 @@ if (!isset($data)) {
 }
 ?>
 <header>
-
     <ul>
         <li><a href="index.php"><img src="img/logo.png" id="logo" alt="logo fooder"></a></li>
         <li><a href="index.php"><h2>FOODer</h2></a></li>

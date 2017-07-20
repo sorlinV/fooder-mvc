@@ -10,9 +10,9 @@
     <title>register</title>
 </head>
     <body>
-        <?php
-            include_once 'header.php';
-            include 'libaff/formConnect.html';
-        ?>
+    <?php include_once 'header.php'; ?>
+    <main>
+        <?php include 'libaff/formConnect.html'; ?>
+    </main>
     </body>
 </html>

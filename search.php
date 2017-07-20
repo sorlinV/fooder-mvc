@@ -11,9 +11,12 @@
 </head>
 <body>
     <?php
-        include_once 'header.php';
-        include 'libaff/formSearch.php';
-        include 'libaff/affSearch.php';
-    ?>
+    include_once 'header.php'; ?>
+    <main>
+        <?php
+            include 'libaff/formSearch.php';
+            include 'libaff/affSearch.php';
+        ?>
+    </main>
 </body>
 </html>

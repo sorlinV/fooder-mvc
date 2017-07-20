@@ -11,13 +11,13 @@ if (!isset($data)) {
     $data = new Data();
 }
 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-if (isset($post['user']) && isset($post['password']) && isset($post['password2'])
-    && $post['password'] == $post['password2'] && isset($post['adresse'])
-    && isset($post['firstname']) && isset($post['lastname'])) {
+if (!empty($post['user']) && !empty($post['password']) && !empty($post['password2'])
+    && $post['password'] == $post['password2'] && !empty($post['adresse'])
+    && !empty($post['firstname']) && !empty($post['lastname'])) {
     if (!is_dir("../data/imgUser")) {
         mkdir("../data/imgUser");
     }
-    if (isset($_FILES['avatar']) && count($_FILES) != 0
+    if (!empty($_FILES['avatar']) && count($_FILES) != 0
         && $_FILES['avatar']['tmp_name'] !== "") {
         $img = "data/imgUser/" . $post['user'] . ".png";
         move_uploaded_file($_FILES['avatar']['tmp_name'], "../" . $img);

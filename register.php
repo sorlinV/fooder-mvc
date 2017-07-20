@@ -10,14 +10,21 @@
     <title>register</title>
 </head>
     <body>
+    <?php
+    include_once 'header.php'; ?>
+    <main>
         <?php
-            include_once 'header.php';
-            if (isset($_GET['error']) && $_GET['error'] == 1) : ?>
-                <form action="">
-                    <p class="error">Something is wrong with formulaire</p>
-                </form>
-            <?php endif;
-            include_once 'libaff/formRegister.html';
+        if (!empty($_GET['error']) && $_GET['error'] == 1) : ?>
+            <form action="">
+                <p class="error">One field is wrong !</p>
+            </form>
+        <?php elseif (!empty($_GET['error']) && $_GET['error'] == 2) :?>
+            <form action="">
+                <p class="error">This user is already use !</p>
+            </form>
+        <?php endif;
+        include_once 'libaff/formRegister.html';
         ?>
+    </main>
     </body>
 </html>

@@ -17,11 +17,11 @@ if (!empty($post['newTags'])) {
     }
 }
 
-if (isset($_SESSION['user'])) {
+if (!empty($_SESSION['user'])) {
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    if (isset($post['title']) && isset($post['place']) && isset($post['type']) &&
-        isset($post['date']) && isset($post['time'])) {
-        if (isset($_FILES['eventimg']) && $_FILES['eventimg']['tmp_name'] !== "") {
+    if (!empty($post['title']) && !empty($post['place']) && !empty($post['type']) &&
+        !empty($post['date']) && !empty($post['time'])) {
+        if (!empty($_FILES['eventimg']) && $_FILES['eventimg']['tmp_name'] !== "") {
             if (!is_dir("../data/imgEvent")) {
                 mkdir("../data/imgEvent");
             }
@@ -31,12 +31,17 @@ if (isset($_SESSION['user'])) {
                 . "-" . str_replace(":", "-", $post['time']), $post['type'],
                 $post['place'], "data/imgEvent/" . $post['title'] . '.png', unserialize($_SESSION['user']), $tags);
         } else {
-            $event = new Event($post['title'], $post['date'] . $post['time'], $post['type'],
+            $event = new Event($post['title'], $post['date']
+                . "-" . str_replace(":", "-", $post['time']), $post['type'],
                 $post['place'], false, unserialize($_SESSION['user']), $tags);
         }
         $data->addEvent($event);
+    } else {
+        header('location: ../addEvent.php?error=1');
+        exit();
     }
 } else {
     header('location: ../addEvent.php?error=1');
+    exit();
 }
 header('location: ../index.php');

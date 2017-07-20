@@ -92,7 +92,8 @@ class Data {
     function addUser($user) {
         foreach ($this->users as $u) {
             if ($u->getUser() == $user->getUser()) {
-                return false;
+                header('location: ../register.php?error=2');
+                exit();
             }
         }
         array_push($this->users, $user);
@@ -102,7 +103,8 @@ class Data {
         $temp = [];
         foreach ($this->events as $e) {
             if ($e->getTitle() == $event->getTitle()) {
-                return false;
+                header('location: ../addEvent.php?error=2');
+                exit();
             }
         }
         $newDate = intval(str_replace("-", "", $event->getDate()));

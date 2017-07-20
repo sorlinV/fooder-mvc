@@ -10,8 +10,10 @@
     <title>Profil</title>
 </head>
 <body>
+<?php
+include 'header.php'; ?>
+<main>
     <?php
-        include 'header.php';
     if (isset($_SESSION['user']) && isset($_GET['edit']) && $_GET['edit'] == "1") {
         include 'libaff/editUser.php'; ?>
         <form action="" method="get">
@@ -23,13 +25,14 @@
             <button name="edit" value="1">Edit profil</button>
         </form>
     <?php } else { ?>
-    <article class="index">
-        <h2>Before consulting profil: </h2>
-        <h2>Register : </h2>
-        <a href="register.php"><p>REGISTER</p></a>
-        <h2>Connect : </h2>
-        <a href="connect.php"><p>Connections</p></a>
-    </article>
+        <article class="index">
+            <h2>Before consulting profil: </h2>
+            <h2>Register : </h2>
+            <a href="register.php"><p>REGISTER</p></a>
+            <h2>Connect : </h2>
+            <a href="connect.php"><p>Connections</p></a>
+        </article>
     <?php } ?>
+</main>
 </body>
 </html>
